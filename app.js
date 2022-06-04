@@ -5,6 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require('./config/morgan');
 
 const app = express();
 
@@ -16,6 +17,11 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: true }))
  
 // parse application/json
 app.use(bodyParser.json({limit: '10mb'}))
+
+if (config.env !== 'test') {
+    app.use(morgan.successHandler);
+    app.use(morgan.errorHandler);
+}
 
 // sanitize request data
 app.use(xss());

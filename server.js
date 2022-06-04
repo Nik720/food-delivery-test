@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const app = require('./app');
 const config = require('./config/config');
+const logger = require('./config/logger');
 
 let server;
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   mongoose.set('useFindAndModify', false);
+  logger.info('Connected to MongoDB');
   server = app.listen(config.port, () => {
-    console.log(`Listening to port ${config.port}`);
+    logger.info(`Listening to port ${config.port}`);
   });
 });
 
