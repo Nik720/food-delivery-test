@@ -5,6 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const config = require('./config/config');
 const morgan = require('./config/morgan');
 
 const app = express();
@@ -33,11 +34,5 @@ app.use(compression());
 // enable cors
 app.use(cors());
 app.options('*', cors());
-
-// convert error to ApiError, if needed
-app.use(errorConverter);
-
-// handle error
-app.use(errorHandler);
 
 module.exports = app;
