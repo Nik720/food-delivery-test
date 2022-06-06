@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 
 const envVars = dotenv.config().parsed;
 module.exports = {
-    api_host: "http://localhost:5001/api/v1/" ,
     env: process.env.NODE_ENV || envVars.NODE_ENV,
     port: process.env.SERVER_PORT || envVars.PORT,
     mongoose: {
