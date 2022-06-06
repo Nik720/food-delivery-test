@@ -19,7 +19,37 @@ const createUser = async (userBody) => {
   }
 };
 
+/**
+ * Get user by id
+ * @param {ObjectId} id
+ * @returns {Promise<User>}
+ */
+const getUserById = async (id) => {
+  try {
+    const user = User.findById(id);
+    return user;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
+
+/**
+ * Get user by email
+ * @param {string} email
+ * @returns {Promise<User>}
+ */
+const getUserByEmail = async (email) => {
+  try {
+    const user = User.findOne({ email });
+    return user;
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message);
+  }
+};
+
 
 module.exports = {
-  createUser
+  createUser,
+  getUserById,
+  getUserByEmail
 };
