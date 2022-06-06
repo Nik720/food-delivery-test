@@ -16,8 +16,19 @@ const login = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send(await successResponse("api.auth.login", userDetails, req));
 });
 
+const logout = catchAsync(async (req, res) => {
+  await authService.logout(req.body.refreshToken);
+  res.status(httpStatus.OK).send(await successResponse("api.auth.logout", {}, req));
+});
+
+const refreshTokens = catchAsync(async (req, res) => {
+  const tokens = await authService.refreshAuth(req.body.refreshToken);
+  res.status(httpStatus.OK).send(await successResponse("api.auth.refreshtoken", { ...tokens }, req));
+});
 
 module.exports = {
   register,
-  login
+  login,
+  logout,
+  refreshTokens
 };

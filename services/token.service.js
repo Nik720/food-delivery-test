@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const httpStatus = require('http-status');
 const config = require('../config/config');
 const { Token } = require('../v1/models');
+const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 
 /**
@@ -43,6 +45,26 @@ const saveToken = async (token, userId, expires, type, blacklisted = false) => {
 };
 
 /**
+ * Verify token and return token doc (or throw an error if it is not valid)
+ * @param {string} token
+ * @param {string} type
+ * @returns {Promise<Token>}
+ */
+const verifyToken = async (token, type) => {
+  try {
+    const payload = jwt.verify(token, config.jwt.secret);
+    const tokenDoc = await Token.findOne({ token, type, user: payload.sub, blacklisted: false });
+    if (!tokenDoc) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Token not found');
+    }
+    return tokenDoc;
+  } catch(error) {
+    throw new ApiError(error.status, error);
+  }
+  
+};
+
+/**
  * Generate auth tokens
  * @param {User} user
  * @returns {Promise<Object>}
@@ -67,8 +89,11 @@ const generateAuthTokens = async (user) => {
   };
 };
 
+
+
 module.exports = {
   generateToken,
   saveToken,
+  verifyToken,
   generateAuthTokens
 };
