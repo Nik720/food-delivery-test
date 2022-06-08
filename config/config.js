@@ -14,8 +14,8 @@ module.exports = {
       },
     },
     jwt: {
-      secret: envVars.JWT_SECRET,
-      accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
-      refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS
+      secret: process.env.JWT_SECRET || envVars.JWT_SECRET,
+      accessExpirationMinutes: process.env.JWT_ACCESS_EXPIRATION_MINUTES || envVars.JWT_ACCESS_EXPIRATION_MINUTES,
+      refreshExpirationDays: process.env.JWT_REFRESH_EXPIRATION_DAYS || envVars.JWT_REFRESH_EXPIRATION_DAYS
     }
   };
