@@ -1,4 +1,4 @@
-import Login from "../components/login/Login";
+import Login from "../components/Login";
 import cardImage from "./../assets/images/card_image.png"
 import "./Login-page.css"
 
