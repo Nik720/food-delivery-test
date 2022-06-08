@@ -1,8 +1,25 @@
+import { useState, useEffect, useContext } from 'react';
 import Login from "../components/Login";
+import Signup from "../components/Signup";
 import cardImage from "./../assets/images/card_image.png"
-import "./Login-page.css"
+import AuthContext from '../context/AuthProvider';
 
 const LoginPage = () => {
+    const { setAuth } = useContext(AuthContext);
+    const [enableLogin, setWantLogin] = useState(true);
+
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser);
+            setAuth(foundUser);
+        }
+    }, []);
+
+    function handleClick(newValue) {
+        setWantLogin(newValue);
+    }
+
     return (
         <div className="h-screen flex">
             <div className="flex flex-auto justify-evenly p-4 w-12/12 md:w-5/12 lg:w-5/12 bg-white">
@@ -10,7 +27,11 @@ const LoginPage = () => {
                     <div className="logo mb-5">
                         <img src={require('./../assets/images/logo.png')} alt="" />
                     </div>
-                    <Login />
+                    {
+                        enableLogin ? 
+                        <Login setStateOfPage = {handleClick} /> : 
+                        <Signup setStateOfPage = {handleClick} />
+                    }
                 </div>
             </div>
 

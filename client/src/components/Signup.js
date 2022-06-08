@@ -1,68 +1,74 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from '../context/AuthProvider';
-import ErrorMessage from './ErrorMessage';
+import { useRef, useState, useEffect } from 'react';
 import axios from '../api/axios';
-const LOGIN_URL = '/api/v1/auth/login';
+import ErrorMessage from './ErrorMessage';
+const SIGNUP_URL = '/api/v1/auth/register';
 
-const Login = (props) => {
-
-    const { setAuth } = useContext(AuthContext);
-	const userRef = useRef();
+const Signup = (props) => {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [name, setName] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [email, password]);
+	}, [email, password, name]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		try {
 			const response = await axios.post(
-				LOGIN_URL,
-				JSON.stringify({ email, password }),
+				SIGNUP_URL,
+				JSON.stringify({ name, email, password }),
 				{
 					headers: { 'Content-Type': 'application/json' }
 				}
 			);
-
-			const accessToken = response?.data?.data?.tokens?.access?.token;
-			const roles = response?.data?.roles || "user";
-            const user = { email, roles, accessToken };
-            localStorage.setItem('user', JSON.stringify(user));
-			setAuth({ email, roles, accessToken });
 			setEmail('');
 			setPassword('');
+			setName('');
+            handleClick();
 		} catch (err) {
 			if (!err?.response) {
 				setErrMsg('No Server Response');
-			} else if (err.response.data.params.errmsg) {
+			} else if (err.response?.status === 400) {
 				setErrMsg(err.response.data.params.errmsg);
-			} else if (err.response?.status === 401) {
-				setErrMsg('Unauthorized');
 			} else {
-				setErrMsg('Login Failed');
+				setErrMsg('Registration Failed');
 			}
 		}
 	};
 
     const handleClick = () => {
-        props.setStateOfPage(false);
+        props.setStateOfPage(true);
     }
 
     return (
         <>
             <div className="bg-white login-sec text-c-sub-text">
-                <h1 className="text-c-heading font-bold text-5xl mb-5">Login</h1>
+                
+                <h1 className="text-c-heading font-bold text-5xl mb-5">Register</h1>
                 <p className=" text-sm font-normal mb-7">Sign in with your data that you entered
                     during your registration. </p>
-                
+
                 {errMsg != '' ? <ErrorMessage variant="error">{errMsg}</ErrorMessage> : '' } 
-                
+
                 <form onSubmit={handleSubmit}>
+
+                    <div className="field mb-5 ">
+                        <label className="text-xs" htmlFor="username">Name</label>
+                        <div className="flex items-center border py-1 px-3 h-11 rounded-[8px] text-sm">
+                            <input className="flex-auto outline-none border-none leading-8"
+                                    type="text"
+                                    id="n"
+                                    autoComplete="off"
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
+                                    required
+                                    placeholder="Name" />
+                        </div>
+                    </div>  
 
                     <div className="field mb-5 ">
                         <label className="text-xs" htmlFor="username">Email</label>
@@ -70,7 +76,6 @@ const Login = (props) => {
                             <input className="flex-auto outline-none border-none leading-8"
                                     type="email"
                                     id="c"
-                                    ref={userRef}
                                     autoComplete="off"
                                     onChange={(e) => setEmail(e.target.value)}
                                     value={email}
@@ -97,26 +102,16 @@ const Login = (props) => {
                             </svg>
                         </div>
                     </div>
-
-                    <div className="field mb-5">
-                        <label className="flex flex-auto text-xs" htmlFor="rememberme">
-                            <input type="checkbox" className="default:ring-4 mr-2" name="remember" />
-                            <span>Keep me logged in</span>
-                        </label>
-                    </div>
                     
-                    <button type="submit" className="block w-full bg-c-blue mt-4 py-2 rounded-[7px] text-white font-semibold mb-2">Login</button>
+                    <button type="submit" className="block w-full bg-c-blue mt-4 py-2 rounded-[7px] text-white font-semibold mb-2">Register</button>
                     
                 </form>
-                <div className="text-sm ml-2 hover:text-blue-500 text-c-blue cursor-pointer text-center">
-                    <a href="">Forgot Password ?</a>
-                </div>
             </div>
             <div className="text-center text-sm md:absolute bottom-5 left-0 w-full">
-                <p>Don't have an account? <a onClick={handleClick} className="text-c-blue">Sign up</a></p>
+                <p>Already have an account? <a href="#" onClick={handleClick} className="text-c-blue">Login</a></p>
             </div>
         </>
     );
 }
 
-export default Login;
+export default Signup;
