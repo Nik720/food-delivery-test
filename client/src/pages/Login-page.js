@@ -14,7 +14,7 @@ const LoginPage = () => {
             const foundUser = JSON.parse(loggedInUser);
             setAuth(foundUser);
         }
-    }, []);
+    }, [setAuth]);
 
     function handleClick(newValue) {
         setWantLogin(newValue);
@@ -38,7 +38,7 @@ const LoginPage = () => {
 
             <div className="hidden md:flex md:w-7/12 lg:w-7/12 bg-c-blue i">
                 <div className="my-4">
-                    <img src={cardImage} className="w-2/3 mx-auto mt-10"/>
+                    <img src={cardImage} alt="card title" className="w-2/3 mx-auto mt-10"/>
                     <h1 className="text-white font-bold text-2xl font-sans text-center mt-5">Leave reviews for all meals</h1>
                     <p className="text-white mt-5 text-center  md:w-7/12 lg:w-7/12 mx-auto">Lorem ipsum dolor sit amet, magna scaevola his ei. Cum te paulo probatus molestiae, eirmod assentior eum ne, et omnis antiopam mel.</p>
                 </div>

@@ -1,6 +1,6 @@
-import React from 'react'
 
-function DealSection() {
+const DealSection = () => {
+
   return (
     <div>
       <section className="md:px-24  bg-blueGray-200 mt-2">
@@ -10,7 +10,7 @@ function DealSection() {
                         <div className="flex flex-warp">
                             <div className="relative flex flex-col">
                                 <div className="px-4 mt-2 flex-auto">
-                                    <img src={require('../../assets/images/deal2.png')} className="w-full"/>
+                                    <img alt="deal banner name" src={require('../../assets/images/deal2.png')} className="w-full"/>
                                 </div>
                             </div>
                             <div className="relative flex flex-col">
@@ -29,7 +29,7 @@ function DealSection() {
                         <div className="flex flex-warp">
                             <div className="relative flex flex-col">
                                 <div className="px-4 mt-2 flex-auto">
-                                    <img src={require('../../assets/images/deal1.png')} className="w-full"/>
+                                    <img alt="deal banner name" src={require('../../assets/images/deal1.png')} className="w-full"/>
                                 </div>
                             </div>
                             <div className="relative flex flex-col">

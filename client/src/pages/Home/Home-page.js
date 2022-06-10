@@ -5,8 +5,7 @@ import DealSection from "./DealSection";
 import NavBar from "./NavBar";
 
 const HomePage = (props) => {
-    const [navbarOpen, setNavbarOpen] = React.useState(false);
-
+ 
     return (
         <>
             <NavBar/>

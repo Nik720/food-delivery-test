@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import ErrorMessage from './ErrorMessage';
 const SIGNUP_URL = '/api/v1/auth/register';
@@ -18,7 +18,7 @@ const Signup = (props) => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(
+			await axios.post(
 				SIGNUP_URL,
 				JSON.stringify({ name, email, password }),
 				{
@@ -52,7 +52,7 @@ const Signup = (props) => {
                 <p className=" text-sm font-normal mb-7">Sign in with your data that you entered
                     during your registration. </p>
 
-                {errMsg != '' ? <ErrorMessage variant="error">{errMsg}</ErrorMessage> : '' } 
+                {errMsg !== '' ? <ErrorMessage variant="error">{errMsg}</ErrorMessage> : '' } 
 
                 <form onSubmit={handleSubmit}>
 
@@ -108,7 +108,7 @@ const Signup = (props) => {
                 </form>
             </div>
             <div className="text-center text-sm md:absolute bottom-5 left-0 w-full">
-                <p>Already have an account? <a href="#" onClick={handleClick} className="text-c-blue">Login</a></p>
+                <p>Already have an account? <button onClick={handleClick} className="text-c-blue">Login</button></p>
             </div>
         </>
     );

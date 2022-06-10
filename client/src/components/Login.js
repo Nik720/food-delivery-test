@@ -60,7 +60,7 @@ const Login = (props) => {
                 <p className=" text-sm font-normal mb-7">Sign in with your data that you entered
                     during your registration. </p>
                 
-                {errMsg != '' ? <ErrorMessage variant="error">{errMsg}</ErrorMessage> : '' } 
+                {errMsg !== '' ? <ErrorMessage variant="error">{errMsg}</ErrorMessage> : '' } 
                 
                 <form onSubmit={handleSubmit}>
 
@@ -109,11 +109,11 @@ const Login = (props) => {
                     
                 </form>
                 <div className="text-sm ml-2 hover:text-blue-500 text-c-blue cursor-pointer text-center">
-                    <a href="">Forgot Password ?</a>
+                    <button className="text-c-blue">Forgot Password ?</button>
                 </div>
             </div>
             <div className="text-center text-sm md:absolute bottom-5 left-0 w-full">
-                <p>Don't have an account? <a onClick={handleClick} className="text-c-blue">Sign up</a></p>
+                <p>Don't have an account? <button onClick={handleClick} className="text-c-blue">Sign up</button></p>
             </div>
         </>
     );
