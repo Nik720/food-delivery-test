@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/food-delivery-test/static/css/main.df11eed0.css",
-    "main.js": "/food-delivery-test/static/js/main.fc00ca89.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/food-delivery-test/static/js/787.c4e7f8f9.chunk.js",
-    "static/media/card_image.png": "/food-delivery-test/static/media/card_image.ba6a60c2b9a7da38dd2d.png",
-    "static/media/deal1.png": "/food-delivery-test/static/media/deal1.1a81158e8236219ec901.png",
-    "static/media/deal2.png": "/food-delivery-test/static/media/deal2.9b19f9015992325aef02.png",
-    "index.html": "/food-delivery-test/index.html",
-    "main.df11eed0.css.map": "/food-delivery-test/static/css/main.df11eed0.css.map",
-    "main.fc00ca89.js.map": "/food-delivery-test/static/js/main.fc00ca89.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/food-delivery-test/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/static/css/main.df11eed0.css",
+    "main.js": "/static/js/main.e3cc7ae9.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/card_image.png": "/static/media/card_image.ba6a60c2b9a7da38dd2d.png",
+    "static/media/deal1.png": "/static/media/deal1.1a81158e8236219ec901.png",
+    "static/media/deal2.png": "/static/media/deal2.9b19f9015992325aef02.png",
+    "index.html": "/index.html",
+    "main.df11eed0.css.map": "/static/css/main.df11eed0.css.map",
+    "main.e3cc7ae9.js.map": "/static/js/main.e3cc7ae9.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.df11eed0.css",
-    "static/js/main.fc00ca89.js"
+    "static/js/main.e3cc7ae9.js"
   ]
 }
